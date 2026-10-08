@@ -1,0 +1,67 @@
+<main class="wrap" id="app">
+  <header class="app-head">
+    <div class="brand">
+      <p class="eyebrow">学習カセット</p>
+      <h1 id="cTitle">カセットを読み込んでください</h1>
+      <p class="kicker" id="cKicker"></p>
+    </div>
+    <div class="loader">
+      <label class="lbtn" for="fileIn">カセットを読み込む</label>
+      <input class="vh" type="file" id="fileIn" accept=".json,application/json">
+      <div class="samples" id="samples"></div>
+    </div>
+  </header>
+
+  <div class="alert" id="alert" role="alert" hidden></div>
+
+  <section class="empty" id="empty">
+    <p><b>.cassette.json</b> を選ぶか、この画面にドロップすると再生できます。</p>
+    <p>音声入りのカセットは埋め込み音声で、下書きのカセットはこの端末の読み上げで再生します。</p>
+  </section>
+
+  <section class="player" id="player" aria-label="学習動画プレイヤー" hidden>
+    <div class="topbar">
+      <span class="ch-name" id="chName"></span>
+      <div class="segs" id="segs"></div>
+      <span class="src-now" id="srcNow"></span>
+    </div>
+    <div class="viewport" id="viewport">
+      <div class="stage" id="stage">
+        <div id="scenes"></div>
+        <button class="start-btn" id="startBtn" type="button" aria-label="再生">▶ 再生 <span id="startDur"></span></button>
+        <div class="strip" id="thinkStrip" hidden><span>考える時間です。答えを聞くには再生を。</span><button type="button" id="thinkBtn">答えを聞く ▶</button></div>
+        <div class="strip" id="endStrip" hidden><span>おしまい</span><button type="button" id="againBtn">最初から ↺</button></div>
+      </div>
+    </div>
+    <div class="caption" id="caption" aria-live="polite"><span></span></div>
+    <div class="controls">
+      <button class="cbtn" id="playBtn" type="button" aria-label="再生/一時停止 (Space)">▶</button>
+      <span class="time" id="time">0:00 / 0:00</span>
+      <div class="seek"><input id="seek" type="range" min="0" max="1" step="any" value="0" aria-label="再生位置"><div class="ticks" id="ticks"></div></div>
+      <button class="cbtn" id="ccBtn" type="button" aria-pressed="true" aria-label="字幕の表示">字幕</button>
+      <button class="cbtn" id="speedBtn" type="button" aria-label="再生速度">1×</button>
+      <select class="vsel" id="voiceSel" aria-label="読み上げの声" hidden></select>
+      <span class="mode" id="modeChip"></span>
+    </div>
+  </section>
+
+  <div class="below" id="below" hidden>
+    <section class="panel tr" aria-label="文字起こし">
+      <h2>文字起こし（タップでその位置へ）</h2>
+      <div id="tr"></div>
+    </section>
+    <div class="side">
+      <section class="panel" aria-label="出典">
+        <h2>出典</h2>
+        <ol class="srcs" id="srcs"></ol>
+      </section>
+      <details class="panel info">
+        <summary>カセット情報</summary>
+        <dl id="info"></dl>
+        <ul class="warns" id="warns"></ul>
+      </details>
+    </div>
+  </div>
+  <p class="credit" id="credit"></p>
+</main>
+<div class="drop" id="drop" hidden><p>ここで離すと読み込みます</p></div>

@@ -1,0 +1,50 @@
+format: lesson-cassette
+version: 1
+id: bad-new
+title: 新部品の検証テスト
+sources: [{id: s1, label: テスト}]
+chapters:
+  - id: c1
+    title: テスト
+    scenes:
+      - id: t-1
+        blocks:
+          - {type: table, style: grid, head: [a, b], rows: [[1, 2]], align: [left], widths: [1, -2]}
+          - {type: table, style: matrix, head: [only], rows: [[1]]}
+          - {type: table, style: convert, head: [小数, 百分率と歩合とそのほかの長い見出し], rows: [["0.1", "10%"]], widths: [1, 1]}
+          - {type: table, style: plain, head: [a, b, c], rows: [[1, 2, 3]], align: [left, center, middle]}
+        lines: [{text: 一}, {text: 二}]
+      - id: t-2
+        blocks:
+          - type: plot
+            x: [-3, 3]
+            y: [-3, 3]
+            curves:
+              - {kind: segment, from: [0, 0], to: [0, 0]}
+              - {kind: segment, from: [0, 0], arrow: yes}
+              - {kind: segment, from: [0, 0], to: [1, 2], keys: [{at: 0, a: 1}], dash: 1}
+              - {kind: circle}
+        lines: [{text: 一}]
+      - id: t-3
+        blocks:
+          - {type: numberline, range: [1, 0], step: 0}
+          - {type: numberline, range: [0, 1], step: 0.3, label_every: 0, second: {factor: 0}}
+          - type: numberline
+            range: [0, 10]
+            step: 0.1
+            points: [{value: 11}, {value: 5, at: 3}]
+            spans: [{from: 5, to: 2}, {from: 1, to: 2, focus: [9]}]
+            labels: [{value: 3}, {value: 20, text: x}]
+        lines: [{text: 一}, {text: 二}]
+      - id: t-4
+        blocks:
+          - {type: chart, kind: pie, labels: [a], series: []}
+          - type: chart
+            kind: bar
+            labels: [a, b, c]
+            series: [{values: [1, 2]}, {name: B, values: [1, 2, 99], at: 5}]
+            y: [10, 50]
+            height: 100
+            values: maybe
+          - {type: chart, kind: line, labels: [a, b], series: [{values: [1, 2]}, {values: [3, 4]}, {name: c, values: [1, 1]}, {name: d, values: [1, 1]}]}
+        lines: [{text: 一}]

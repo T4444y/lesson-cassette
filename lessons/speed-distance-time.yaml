@@ -1,0 +1,318 @@
+# 構成：速さ・時間・道のりの関係（小学5年 算数「速さ」の入門。約5〜6分、14シーン）
+#  1 はじめに   intro-1  3つの量がつながっていること（title・bullets・text）
+#  2 速さとは   speed-1  どちらが速い？（compare、作った例）
+#               speed-2  1分あたりにそろえる（steps・chart bar）
+#               speed-3  速さ＝道のり÷時間、時速・分速・秒速（formula・bullets・note）
+#  3 3つの式    rel-1    二重数直線で道のりを求める（numberline + second・formula）
+#               rel-2    二重数直線で時間を求める（numberline + second・formula）
+#               rel-3    3つの式の表（table plain + widths・align）
+#  4 表とグラフ graph-1  速さ×時間の表（table matrix、交わるセルを強調）
+#               graph-2  時間と道のりの折れ線（chart line、2系列）
+#               graph-3  傾き＝速さ（plot line + segment）
+#  5 単位       units-1  時速・分速・秒速の換算表（table convert）
+#  6 確認       check-1  何分かかる？（km→m をそろえて時間を求める）
+#               check-2  どちらが速い？（秒速→時速に換算して比べる）
+#  7 まとめ     end-1    箇条書き3項目
+# 範囲の外：平均（平均の速さの詳しい扱い）、旅人算・通過算などの応用、速さと比例のグラフの式（y = 決まった数 × x）
+format: lesson-cassette
+version: 1
+id: speed-distance-time
+title: 速さ・時間・道のりの関係
+kicker: 小学5年 算数 ・ 速さ
+lang: ja
+sources:
+  - id: s1
+    label: 小学校 算数「速さ」の標準的な内容
+    note: 特定の教科書によらない一般的な内容。式・換算・表とグラフの数値・問いの答えは、作成時にプログラム（sympy）で検算（lessons/speed-distance-time.verify.py）
+  - id: s2
+    label: 奈良県教育委員会「新学習指導要領への移行措置」説明資料（算数）p.8
+    url: https://www.pref.nara.jp/secure/207220/3101setsumei_shosan.pdf
+    note: 平成29年告示の学習指導要領で、速さは第6学年から第5学年へ移ったことの確認
+chapters:
+  - id: intro
+    title: はじめに
+    scenes:
+      - id: intro-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 速さ・時間・道のり, text: 3つの量は、つながっている}
+          - type: bullets
+            at: 1
+            items:
+              - どちらが速い？
+              - 何分かかる？
+              - 何m進む？
+          - {type: text, text: "2つが分かれば、残りの1つが分かる", at: 2}
+        lines:
+          - text: このカセットでは、速さ・時間・道のりの関係を学びます。小学5年の算数の内容です。
+          - text: どちらが速いか、何分かかるか、何m進むか。速さの問題は、身の回りにたくさんあります。
+            say: どちらが速いか、なんぷんかかるか、なんメートル進むか。速さの問題は、身の回りにたくさんあります。
+          - text: この3つの量は、1つの関係でつながっています。2つが分かれば、残りの1つが分かります。
+  - id: speed
+    title: 速さとは
+    scenes:
+      - id: speed-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 作った例, text: どちらが速い？}
+          - type: compare
+            arrow: false
+            left: {label: Aさん, title: 5分で300m, note: 道のりが長い, tone: plain}
+            right: {label: Bさん, title: 3分で240m, note: 時間が短い, tone: plain}
+        lines:
+          - text: 作った例で考えます。Aさんは5分で300m、Bさんは3分で240m歩きました。
+            say: 作った例で考えます。エーさんは、5分で300メートル、ビーさんは、3分で240メートル歩きました。
+          - text: 道のりも時間も違うので、このままでは比べにくいです。
+          - text: そこで、どちらも、1分あたりに進む道のりにそろえて比べます。
+      - id: speed-2
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 作った例, text: 1分あたりにそろえる}
+          - type: steps
+            items:
+              - {title: "Aさん：300 ÷ 5 = 60", note: 1分あたり60m, at: 0, focus: [0]}
+              - {title: "Bさん：240 ÷ 3 = 80", note: 1分あたり80m, at: 1, focus: [1]}
+          - type: chart
+            kind: bar
+            at: 2
+            height: 180
+            labels: [Aさん, Bさん]
+            unit: m
+            series:
+              - {values: [60, 80]}
+        lines:
+          - text: Aさんは、300mを5で割って、1分あたり60mです。
+            say: エーさんは、300メートルを、5で割って、1分あたり、60メートルです。
+          - text: Bさんは、240mを3で割って、1分あたり80mです。
+            say: ビーさんは、240メートルを、3で割って、1分あたり、80メートルです。
+          - text: 1分あたりに長く進むBさんのほうが、速いといえます。
+            say: 1分あたりに長く進む、ビーさんのほうが、速いといえます。
+      - id: speed-3
+        sources: [s1]
+        blocks:
+          - {type: formula, text: "速さ ＝ 道のり ÷ 時間"}
+          - type: bullets
+            items:
+              - {text: "**時速**：1時間あたりに進む道のり", at: 1, focus: [1]}
+              - {text: "**分速**：1分あたりに進む道のり", at: 2, focus: [2]}
+              - {text: "**秒速**：1秒あたりに進む道のり", at: 2, focus: [2]}
+          - {type: note, label: 補足, text: "ここでは速さが変わらないとして考える。実際に途中で速さが変わるとき、この式で求めるのは平均の速さ", at: 3}
+        lines:
+          - text: 速さは、決まった時間あたりに進む道のりです。速さ ＝ 道のり ÷ 時間 で求めます。
+            say: 速さは、決まった時間あたりに進む道のりです。速さ、イコール、道のり、わる、時間、で求めます。
+          - text: 1時間あたりに進む道のりで表した速さを、時速といいます。
+          - text: 1分あたりなら分速、1秒あたりなら秒速です。Bさんの速さは、分速80mです。
+            say: 1分あたりなら分速、1秒あたりなら秒速です。ビーさんの速さは、分速80メートルです。
+          - text: 補足ですが、ここでは、速さはずっと変わらないものとして考えます。
+  - id: relation
+    title: 3つの式
+    scenes:
+      - id: rel-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 二重数直線, text: 道のりを求める}
+          - type: numberline
+            range: [0, 6]
+            step: 1
+            name: 時間
+            suffix: 分
+            second: {factor: 80, suffix: m, name: 道のり}
+            spans:
+              - {from: 0, to: 1, at: 1}
+            points:
+              - {value: 1, label: "1分 = 80m", at: 1, focus: [1]}
+              - {value: 3, label: "3分 = 240m", at: 2, focus: [2]}
+          - {type: formula, text: "道のり ＝ 速さ × 時間", at: 3}
+        lines:
+          - text: 分速80mのBさんの、時間と道のりを、二重数直線に表します。上が時間、下が道のりです。
+            say: 分速80メートルの、ビーさんの、時間と道のりを、二重数直線に表します。上が時間、下が道のりです。
+          - text: 1分で80m進みます。この、1分あたりの道のりが、速さです。
+            say: 1分で、80メートル進みます。この、1分あたりの道のりが、速さです。
+          - text: 3分では、80mの3つ分なので、80 × 3 で240mです。
+            say: 3分では、80メートルの、3つ分なので、80かける3で、240メートルです。
+          - text: 道のりは、速さ × 時間で求められます。
+            say: 道のりは、速さ、かける、時間で求められます。
+      - id: rel-2
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 二重数直線, text: 時間を求める}
+          - type: numberline
+            range: [0, 6]
+            step: 1
+            name: 時間
+            suffix: 分
+            second: {factor: 80, suffix: m, name: 道のり}
+            spans:
+              - {from: 0, to: 5, at: 1}
+            points:
+              - {value: 5, label: "? 分 = 400m", at: 0, out: 1}
+              - {value: 5, label: "5分 = 400m", at: 1}
+          - {type: formula, text: "時間 ＝ 道のり ÷ 速さ", at: 2}
+        lines:
+          - text: では、Bさんが400m歩くには、何分かかるでしょう。
+            say: では、ビーさんが、400メートル歩くには、なんぷんかかるでしょう。
+          - text: 400mの中に、80mが何個分あるかを考えます。400 ÷ 80 で5、つまり5分です。
+            say: 400メートルの中に、80メートルが、なんこぶんあるかを考えます。400わる80で、5。つまり、5分です。
+          - text: 時間は、道のり ÷ 速さで求められます。
+            say: 時間は、道のり、わる、速さで求められます。
+      - id: rel-3
+        sources: [s1]
+        blocks:
+          - {type: title, text: 3つの式をまとめる}
+          - type: table
+            style: plain
+            head: [求めるもの, 式, 例（分速80m）]
+            widths: [2, 3, 3]
+            align: [null, center, right]
+            rows:
+              - {cells: [速さ, 道のり ÷ 時間, "240 ÷ 3 = 80"], at: 0, focus: [0]}
+              - {cells: [道のり, 速さ × 時間, "80 × 3 = 240"], at: 1, focus: [1]}
+              - {cells: [時間, 道のり ÷ 速さ, "400 ÷ 80 = 5"], at: 2, focus: [2]}
+        lines:
+          - text: 3つの式を表にまとめます。速さは、道のり ÷ 時間。240 ÷ 3 で80です。
+            say: 3つの式を、表にまとめます。速さは、道のり、わる、時間。240わる3で、80です。
+          - text: 道のりは、速さ × 時間。80 × 3 で240です。
+            say: 道のりは、速さ、かける、時間。80かける3で、240です。
+          - text: 時間は、道のり ÷ 速さ。400 ÷ 80 で5です。
+            say: 時間は、道のり、わる、速さ。400わる80で、5です。
+          - text: 3つのうち2つが分かれば、残りの1つが求められます。
+  - id: graph
+    title: 表とグラフ
+    scenes:
+      - id: graph-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 作った例 ・ 表の数の単位は m, text: 速さ × 時間 ＝ 道のり}
+          - type: table
+            style: matrix
+            head: ["×", 1分, 2分, 3分, 4分, 5分]
+            rows:
+              - {cells: [分速60m, "60", "120", "180", "240", "300"], focus: [1]}
+              - {cells: [分速80m, "80", "160", "240", "320", "400"], focus: [1, 2]}
+            cols:
+              - null
+              - {focus: [0]}
+              - {focus: [0]}
+              - {focus: [0, 2]}
+              - {focus: [0]}
+              - {focus: [0]}
+        lines:
+          - text: 速さと時間から、道のりを求めた表です。縦が速さ、横が時間です。
+          - text: Aさんは分速60m、Bさんは分速80mです。
+            say: エーさんは、分速60メートル、ビーさんは、分速80メートルです。
+          - text: たとえば、分速80mで3分歩くと、80 × 3 で240mです。
+            say: たとえば、分速80メートルで、3分歩くと、80かける3で、240メートルです。
+          - text: 時間が2倍、3倍になると、道のりも2倍、3倍。道のりは、時間に比例します。
+      - id: graph-2
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 作った例, text: 時間と道のりのグラフ}
+          - type: chart
+            kind: line
+            height: 220
+            labels: [0分, 1分, 2分, 3分, 4分, 5分]
+            unit: m
+            series:
+              - {name: Aさん（分速60m）, values: [0, 60, 120, 180, 240, 300], focus: [0]}
+              - {name: Bさん（分速80m）, values: [0, 80, 160, 240, 320, 400], at: 1, focus: [1, 2]}
+        lines:
+          - text: 表の数を、折れ線グラフにします。横が時間、縦が道のりです。まず、Aさんです。
+            say: 表の数を、折れ線グラフにします。横が時間、縦が道のりです。まず、エーさんです。
+          - text: Bさんの線を重ねます。どちらも、0から始まる、まっすぐな線になります。
+            say: ビーさんの線を重ねます。どちらも、ゼロから始まる、まっすぐな線になります。
+          - text: 速いBさんの線のほうが、急に上がっています。同じ時間で、長く進むからです。
+            say: 速い、ビーさんの線のほうが、急に上がっています。同じ時間で、長く進むからです。
+      - id: graph-3
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 作った例, text: 線の傾きが速さを表す}
+          - {type: text, text: "横は時間（単位は時間）、縦は道のり（km）"}
+          - type: plot
+            x: [0, 3]
+            y: [0, 12]
+            height: 200
+            curves:
+              - {kind: line, m: 4, k: 0, label: 時速4km}
+              - {kind: segment, from: [1, 4], to: [2, 4], arrow: true, color: second, label: 1時間, at: 1}
+              - {kind: segment, from: [2, 4], to: [2, 8], arrow: true, color: second, label: 4km, at: 2}
+        lines:
+          - text: 時速4kmで歩くときの、時間と道のりのグラフです。
+            say: 時速4キロメートルで歩くときの、時間と道のりのグラフです。
+          - text: グラフの上で、右へ1時間進むと、
+          - text: 上へ4km進みます。この4kmが、1時間あたりの道のり、つまり時速4kmです。
+          - text: 線の傾きが急なほど、速いということです。
+  - id: units
+    title: 単位をそろえる
+    scenes:
+      - id: units-1
+        sources: [s1]
+        blocks:
+          - {type: title, text: 時速・分速・秒速を言いかえる}
+          - {type: text, text: "1時間 ＝ 60分、1分 ＝ 60秒、1km ＝ 1000m"}
+          - type: table
+            style: convert
+            head: [時速, 分速, 秒速]
+            rows:
+              - {cells: [3.6km, 60m, 1m], at: 1, focus: [1]}
+              - {cells: [36km, 600m, 10m], at: 2, focus: [2]}
+              - {cells: [72km, 1200m, 20m], at: 3, focus: [3]}
+        lines:
+          - text: 同じ速さを、時速・分速・秒速で言いかえます。1時間は60分、1分は60秒です。
+          - text: 秒速1mは、1分で60m、1時間で3600m、つまり時速3.6kmです。
+            say: 秒速1メートルは、1分で60メートル、1時間で3600メートル、つまり、時速3.6キロメートルです。
+          - text: 秒速10mなら、分速600m、時速36kmです。
+            say: 秒速10メートルなら、分速600メートル、時速36キロメートルです。
+          - text: 時速72kmは、分速1200m、秒速20mです。比べるときは、単位をそろえます。
+            say: 時速72キロメートルは、分速1200メートル、秒速20メートルです。比べるときは、単位をそろえます。
+  - id: check
+    title: 確認
+    scenes:
+      - id: check-1
+        kind: quiz
+        sources: [s1]
+        blocks:
+          - type: quiz
+            question: 1.2kmを分速80mで歩くと、何分かかる？
+            answer: 1.2km ＝ 1200m。1200 ÷ 80 ＝ 15 で、15分
+            answer_at: 1
+        lines:
+          - text: 止めて考えましょう。1.2kmの道のりを、分速80mで歩くと、何分かかるでしょう？
+            say: 止めて考えましょう。1.2キロメートルの道のりを、分速80メートルで歩くと、なんぷんかかるでしょう？
+            pause: true
+          - text: まず単位をそろえて、1.2kmは1200mです。時間は道のり ÷ 速さなので、1200 ÷ 80 で15分です。
+            say: まず単位をそろえて、1.2キロメートルは、1200メートルです。時間は、道のり、わる、速さなので、1200わる80で、15分です。
+      - id: check-2
+        kind: quiz
+        sources: [s1]
+        blocks:
+          - type: quiz
+            question: 秒速8mと時速30km、どちらが速い？
+            answer: 秒速8m ＝ 分速480m ＝ 時速28.8km。時速30kmのほうが速い
+            answer_at: 1
+        lines:
+          - text: もう一問。自転車は秒速8m、バスは時速30kmです。どちらが速いでしょう？
+            say: もう一問。自転車は、秒速8メートル、バスは、時速30キロメートルです。どちらが速いでしょう？
+            pause: true
+          - text: 秒速8mを60倍すると分速480m、さらに60倍すると時速28800m、つまり時速28.8kmです。
+            say: 秒速8メートルを、60倍すると、分速480メートル。さらに60倍すると、時速28800メートル、つまり、時速28.8キロメートルです。
+          - text: 時速30kmより小さいので、バスのほうが速いです。
+            say: 時速30キロメートルより小さいので、バスのほうが速いです。
+  - id: end
+    title: まとめ
+    scenes:
+      - id: end-1
+        sources: [s1]
+        blocks:
+          - {type: title, text: まとめ}
+          - type: bullets
+            items:
+              - {text: "速さ ＝ 道のり ÷ 時間", at: 0, focus: [0]}
+              - {text: "道のり ＝ 速さ × 時間、時間 ＝ 道のり ÷ 速さ", at: 1, focus: [1]}
+              - {text: 比べる前・計算する前に、単位をそろえる, at: 2, focus: [2]}
+        lines:
+          - text: 速さは、決まった時間あたりに進む道のりで、道のり ÷ 時間で求めます。
+            say: 速さは、決まった時間あたりに進む道のりで、道のり、わる、時間で求めます。
+          - text: 道のりは速さ × 時間、時間は道のり ÷ 速さ。迷ったら、二重数直線をかいてみましょう。
+            say: 道のりは、速さ、かける、時間。時間は、道のり、わる、速さです。迷ったら、二重数直線をかいてみましょう。
+          - text: 時速・分速・秒速や、kmとmは、そろえてから比べたり、計算したりしましょう。
+            say: 時速・分速・秒速や、キロメートルとメートルは、そろえてから比べたり、計算したりしましょう。

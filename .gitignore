@@ -1,0 +1,12 @@
+# 生成物・作業用（消しても作り直せる）
+cache/
+qa/
+samples/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.fetched.json
+dist/*.fragment.html
+# 個人の読み（readings.yaml のあとに重なる。公開しない）
+readings.local.yaml

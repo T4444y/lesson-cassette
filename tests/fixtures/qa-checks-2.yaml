@@ -1,0 +1,73 @@
+format: lesson-cassette
+version: 1
+id: qa-checks-2
+title: qa の試験 2
+sources:
+  - {id: s1, label: 試験}
+chapters:
+  - id: c1
+    title: 試験
+    scenes:
+      - id: cv-headunit-ok
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [km, m, cm]
+            rows:
+              - ["1", "1000", "100000"]
+        lines: [{text: 見出しに単位、本体は数だけの正しい換算表。}]
+      - id: cv-headunit-ok2
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [小数, 百分率（%）, 分数]
+            rows:
+              - ["0.5", "50", "1/2"]
+        lines: [{text: 見出しに百分率、本体は数だけの正しい換算表。}]
+      - id: mx-rowunit-colnum
+        sources: [s1]
+        blocks:
+          - type: table
+            style: matrix
+            head: ["×", "1", "2", "3"]
+            rows:
+              - [分速80m, "80", "160", "250"]
+        lines: [{text: 行の見出しだけに単位を付けた2軸の表。}]
+      - id: mx-colunit-rownum
+        sources: [s1]
+        blocks:
+          - type: table
+            style: matrix
+            head: ["×", 1分, 2分, 3分]
+            rows:
+              - ["80", "80", "160", "250"]
+        lines: [{text: 列の見出しだけに単位を付けた2軸の表。}]
+      - id: nl-de
+        sources: [s1]
+        blocks:
+          - type: numberline
+            range: [0, 5]
+            step: 1
+            suffix: 分
+            second: {factor: 80, suffix: m}
+            points:
+              - {value: 4, label: "4分で300m"}
+              - {value: 2, label: "200m"}
+              - {value: 1, label: "2分"}
+        lines: [{text: いろいろな書き方のラベルを間違えた。}]
+      - id: nl-frac
+        sources: [s1]
+        blocks:
+          - type: numberline
+            range: [0, 1]
+            step: 0.25
+            labels:
+              - {value: 0.25, text: 1/4}
+              - {value: 0.5, text: 1/2}
+              - {value: 0.75, text: 3/4}
+            second: {factor: 100, suffix: "%"}
+            points:
+              - {value: 0.75, label: "1/4 = 75%"}
+        lines: [{text: 分数のラベルを間違えた。}]

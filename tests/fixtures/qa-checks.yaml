@@ -1,0 +1,164 @@
+format: lesson-cassette
+version: 1
+id: qa-checks
+title: qa の新しいチェックの試験
+sources:
+  - {id: s1, label: 試験}
+chapters:
+  - id: c1
+    title: 試験
+    scenes:
+      - id: mx-unit-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: matrix
+            head: ["×", 1分, 2分, 3分]
+            rows:
+              - [分速80m, "80", "160", "250"]
+        lines: [{text: 単位つき見出しの2軸の表で、3つ目のセルを間違えた。}]
+      - id: mx-num-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: matrix
+            head: ["×", "1", "2", "3"]
+            rows:
+              - ["80", "80", "160", "250"]
+              - ["3", "3", "6", "9"]
+        lines: [{text: 数だけの見出しの2軸の表で、セルを1つ間違えた。}]
+      - id: mx-plus-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: matrix
+            head: ["+", "1", "2"]
+            rows:
+              - ["10", "11", "13"]
+        lines: [{text: 足し算の表で、セルを1つ間違えた。}]
+      - id: mx-wordy
+        sources: [s1]
+        blocks:
+          - type: table
+            style: matrix
+            head: ["×", 1時間, 2時間]
+            rows:
+              - [時速4km, 4km, 9km]
+        lines: [{text: セルに単位が付いた2軸の表で、セルを1つ間違えた。}]
+      - id: cv-speed-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [時速, 分速, 秒速]
+            rows:
+              - [36km, 600m, 12m]
+              - [3.6km, 60m, 1m]
+        lines: [{text: 速さの換算表で、1行目の秒速を間違えた。}]
+      - id: cv-pct-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [小数, 百分率, 歩合]
+            rows:
+              - ["0.1", 10%, 1割]
+              - ["0.3", 30%, 4割]
+              - ["0.25", 25%, 2割5分]
+        lines: [{text: 割合の換算表で、2行目の歩合を間違えた。}]
+      - id: cv-len-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [km, m, cm]
+            rows:
+              - ["1", "1000", "10000"]
+              - [1.2km, 1200m, 120000cm]
+        lines: [{text: 長さの換算表で、1行目を間違えた。}]
+      - id: cv-time-wrong
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [時間, 分, 秒]
+            rows:
+              - [1時間, 60分, 3000秒]
+              - [0.5時間, 30分, 1800秒]
+        lines: [{text: 時間の換算表で、1行目を間違えた。}]
+      - id: nl-wrong
+        sources: [s1]
+        blocks:
+          - type: numberline
+            range: [0, 5]
+            step: 1
+            suffix: 分
+            second: {factor: 80, suffix: m}
+            points:
+              - {value: 3, label: "3分 = 250m"}
+              - {value: 2, label: "3分 = 240m"}
+              - {value: 5, label: "? = 400m"}
+              - {value: 4, label: "4分で320m"}
+        lines: [{text: 数直線の点のラベルを2つ間違えた。}]
+      - id: nl-crowd
+        sources: [s1]
+        blocks:
+          - type: numberline
+            range: [0, 1]
+            step: 0.1
+            second: {factor: 100, suffix: "%"}
+            points:
+              - {value: 0.3, label: "0.3 = 30%"}
+              - {value: 0.35, label: "0.35 = 35%"}
+              - {value: 0.4, label: "0.4 = 40%"}
+              - {value: 0.45, label: "0.45 = 45%"}
+            spans:
+              - {from: 0, to: 0.35, label: ここまで35%}
+        lines: [{text: 数直線の点のラベルを密に並べた。}]
+      - id: cell-over
+        sources: [s1]
+        blocks:
+          - type: table
+            style: convert
+            head: [時速, 分速, 秒速]
+            rows:
+              - [時速36キロメートルの自動車, 分速600メートル, 秒速10メートル]
+          - type: table
+            head: [項目, 説明, 数]
+            widths: [1, 6, 1]
+            align: [null, left, right]
+            rows:
+              - [とても長い項目名です, 短い, "123456789012"]
+        lines: [{text: 列の幅に収まらないセルを入れた。}]
+      - id: plot-overlap
+        sources: [s1]
+        blocks:
+          - type: plot
+            x: [0, 3]
+            y: [0, 12]
+            height: 180
+            curves:
+              - {kind: line, m: 4, k: 0, label: 時速4キロメートルで歩く人}
+              - {kind: line, m: 4.2, k: 0, label: 時速4.2キロメートルで歩く人}
+              - {kind: segment, from: [1, 4], to: [2, 4], arrow: true, label: 1時間で進む}
+              - {kind: segment, from: [2, 4], to: [2, 8], arrow: true, label: 4キロメートル進む}
+        lines: [{text: ラベルが重なりやすい線を並べた。}]
+      - id: chart-bad
+        sources: [s1]
+        blocks:
+          - type: chart
+            kind: bar
+            y: [50, 90]
+            labels: [A, B]
+            series: [{values: [60, 80]}]
+        lines: [{text: 棒グラフの縦軸を50から始めた。}]
+      - id: focus-empty
+        sources: [s1]
+        blocks:
+          - type: bullets
+            items:
+              - {text: 空の focus, focus: []}
+              - {text: 1行目で強調, focus: [1]}
+        lines:
+          - {text: 0行目。空の focus の項目が強調されるか。}
+          - {text: 1行目。}

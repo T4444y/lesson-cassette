@@ -1,0 +1,235 @@
+# 構成：音符の長さと拍子（楽譜の読み方の入門。約4分、10シーン）
+#  1 はじめに     intro-1  3つの要点（title・bullets）
+#  2 音符の長さ   notes-1  音符と拍の表（table plain、列を最後に）
+#                 notes-2  長さを棒で比べる（chart bar）
+#                 notes-3  1小節を分ける（numberline、点を順に）
+#  3 付点         dot-1    もとの1.5倍（formula・table）
+#  4 拍子         meter-1  拍子記号の上と下の数（compare・text）
+#                 meter-2  主な拍子の表（table plain）
+#                 meter-3  8分の6拍子は3つずつ2拍（numberline、帯）
+#  5 確認         check-1  4分の3拍子に八分音符はいくつ？
+#                 check-2  付点二分音符のあと、何でうめる？
+#  6 まとめ       end-1    箇条書き3項目
+# 範囲の外：休符、連符、タイ、複付点、2分の2拍子などほかの拍子、強拍と弱拍
+# 長さの数はすべて検算（lessons/notes-and-meter.verify.py）
+format: lesson-cassette
+version: 1
+id: notes-and-meter
+title: 音符の長さと拍子
+kicker: 音楽 ・ 楽譜の読み方の基礎
+lang: ja
+sources:
+  - id: s1
+    label: ウィキペディア日本語版「音符」
+    url: https://ja.wikipedia.org/wiki/音符
+    note: 音符の長さの関係（全音符を半分にすると二分音符、さらに半分で四分音符…）、四分音符を1拍とする数え方、付点で長さが1.5倍になること
+  - id: s2
+    label: ウィキペディア日本語版「拍子」
+    url: https://ja.wikipedia.org/wiki/拍子
+    note: 拍子記号の上下の数の意味、4分の2・3・4拍子で1拍になる音符、8分の6拍子が付点四分音符を1拍とする2拍子として数えられること
+chapters:
+  - id: intro
+    title: はじめに
+    scenes:
+      - id: intro-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 音楽 ・ 楽譜の読み方の基礎, text: 音符の長さと拍子}
+          - type: bullets
+            items:
+              - {text: 音符の長さは、2倍と半分の関係, at: 1, focus: [1]}
+              - {text: 付点は、もとの長さの1.5倍, at: 1, focus: [1]}
+              - {text: 拍子記号は、基準の音符とその数, at: 2, focus: [2]}
+        lines:
+          - text: このカセットでは、楽譜を読む基礎として、音符の長さと拍子を学びます。
+          - text: 音符の長さは、2倍と半分の関係になっています。点の付いた音符は、もとの1.5倍です。
+          - text: 拍子記号は、1小節に、どの音符がいくつ入るかを表します。
+            say: 拍子記号は、いっしょうせつに、どの音符が、いくつ入るかを表します。
+  - id: notes
+    title: 音符の長さ
+    scenes:
+      - id: notes-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 音符の長さ, text: 四分音符を1拍として数える}
+          - type: table
+            head: [音符, 長さ（拍）, 全音符を1とすると]
+            widths: [2, 1, 2]
+            align: [left, center, center]
+            rows:
+              - {cells: [全音符, "4", "1"], at: 1, focus: [1]}
+              - {cells: [二分音符, "2", "1/2"], at: 1, focus: [1]}
+              - {cells: [四分音符, "1", "1/4"], at: 0, focus: [0]}
+              - {cells: [八分音符, "1/2", "1/8"], at: 2, focus: [2]}
+              - {cells: [十六分音符, "1/4", "1/16"], at: 2, focus: [2]}
+            cols: [null, null, {at: 3, focus: [3]}]
+        lines:
+          - text: 楽譜では、ふつう、四分音符の長さを1拍として数えます。
+          - text: 全音符は4拍、二分音符は2拍です。
+          - text: 八分音符は2分の1拍、十六分音符は4分の1拍です。
+            say: 八分音符は、2ぶんの1拍、十六分音符は、4ぶんの1拍です。
+          - text: 全音符を1とすると、二分音符は2分の1、四分音符は4分の1。半分ずつになっていきます。
+            say: 全音符を1とすると、二分音符は、2ぶんの1、四分音符は、4ぶんの1。半分ずつに、なっていきます。
+      - id: notes-2
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 音符の長さ, text: 長さを棒で比べる}
+          - type: chart
+            kind: bar
+            labels: [全音符, 二分音符, 四分音符, 八分音符, 十六分音符]
+            series:
+              - {values: [4, 2, 1, 0.5, 0.25]}
+            unit: 拍
+            height: 220
+        lines:
+          - text: 長さを棒グラフで並べると、右へ1つ進むごとに、半分になっているのが分かります。
+          - text: 全音符1つの長さには、十六分音符なら16個入ります。
+      - id: notes-3
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 4分の4拍子の1小節, text: 同じ長さを分ける}
+          - type: numberline
+            range: [0, 4]
+            step: 1
+            name: 拍
+            spans:
+              - {from: 0, to: 4, at: 0}
+            points:
+              - {value: 0, label: 全音符, at: 0, out: 1}
+              - {value: 0, label: 二分音符, at: 1, out: 2}
+              - {value: 2, label: 二分音符, at: 1, out: 2}
+              - {value: 0, label: 四分音符, at: 2}
+              - {value: 1, label: 四分音符, at: 2}
+              - {value: 2, label: 四分音符, at: 2}
+              - {value: 3, label: 四分音符, at: 2}
+        lines:
+          - text: 4分の4拍子の1小節は、4拍です。全音符1つで、1小節がうまります。
+            say: 4ぶんの4びょうしの、いっしょうせつは、4拍です。全音符1つで、いっしょうせつが、うまります。
+          - text: 二分音符なら、2つで1小節です。点は、それぞれの音符が始まる位置です。
+            say: 二分音符なら、2つで、いっしょうせつです。点は、それぞれの音符が始まる位置です。
+          - text: 四分音符なら、4つで1小節になります。
+            say: 四分音符なら、4つで、いっしょうせつになります。
+  - id: dot
+    title: 付点
+    scenes:
+      - id: dot-1
+        sources: [s1]
+        blocks:
+          - {type: formula, text: "付点 ＝ 長さ × 1.5"}
+          - type: table
+            head: [音符, 長さ（拍）]
+            widths: [1, 1]
+            align: [left, center]
+            rows:
+              - {cells: [付点二分音符, "2 × 1.5 = 3"], at: 1, focus: [1]}
+              - {cells: [付点四分音符, "1 × 1.5 = 1.5"], at: 2, focus: [2]}
+              - {cells: [付点八分音符, "0.5 × 1.5 = 0.75"], at: 2, focus: [2]}
+        lines:
+          - text: 音符の右に小さな点を付けると、付点音符になります。長さは、もとの1.5倍です。
+          - text: 付点二分音符は、2拍の1.5倍で、3拍です。
+          - text: 付点四分音符は1.5拍、付点八分音符は0.75拍です。
+  - id: meter
+    title: 拍子
+    scenes:
+      - id: meter-1
+        sources: [s2]
+        blocks:
+          - {type: title, kicker: 拍子, text: 拍子記号の読み方}
+          - type: compare
+            arrow: false
+            at: 1
+            left: {label: 上の数, title: 基準の音符の数}
+            right: {label: 下の数, title: 基準にする音符}
+          - {type: text, text: "4分の3拍子：四分音符が3つ ＝ 3拍", at: 3}
+        lines:
+          - text: 拍子は、楽譜のはじめに、2つの数を上下に重ねて書きます。これを拍子記号といいます。
+          - text: 下の数は、基準にする音符です。4なら四分音符、8なら八分音符です。上の数は、その音符が1小節にいくつ入るかです。
+            say: 下の数は、基準にする音符です。4なら四分音符、8なら八分音符です。上の数は、その音符が、いっしょうせつに、いくつ入るかです。
+          - text: 拍子記号は、分数のように「4分の3」と読みます。
+            say: 拍子記号は、分数のように、4ぶんの3、と読みます。
+          - text: たとえば4分の3拍子は、四分音符が1小節に3つ。四分音符を1拍として、3拍です。
+            say: たとえば、4ぶんの3びょうしは、四分音符が、いっしょうせつに3つ。四分音符を1拍として、3拍です。
+      - id: meter-2
+        sources: [s2]
+        blocks:
+          - {type: title, kicker: 拍子, text: 主な拍子}
+          - type: table
+            head: [拍子, 1拍の音符, 1小節の拍の数]
+            widths: [1, 1, 1]
+            align: [center, center, center]
+            rows:
+              - {cells: [4分の2拍子, 四分音符, "2"], at: 0, focus: [1]}
+              - {cells: [4分の3拍子, 四分音符, "3"], at: 0, focus: [1]}
+              - {cells: [4分の4拍子, 四分音符, "4"], at: 0, focus: [1]}
+              - {cells: [8分の6拍子, 付点四分音符, "2"], at: 2, focus: [2]}
+        lines:
+          - text: 主な拍子を並べました。4分の2、4分の3、4分の4拍子は、どれも四分音符を1拍とします。
+            say: 主な拍子を並べました。4ぶんの2、4ぶんの3、4ぶんの4びょうしは、どれも、四分音符を1拍とします。
+          - text: 上の数が2、3、4と増えると、1小節の拍も、2拍、3拍、4拍と増えます。
+            say: 上の数が、2、3、4と増えると、いっしょうせつの拍も、2拍、3拍、4拍と増えます。
+          - text: 8分の6拍子は少し特別です。八分音符6つを3つずつまとめ、2拍として数えます。
+            say: 8ぶんの6びょうしは、少し特別です。八分音符6つを、3つずつまとめ、2拍として数えます。
+      - id: meter-3
+        sources: [s2]
+        blocks:
+          - {type: title, kicker: 8分の6拍子の1小節, text: 3つずつまとめて2拍}
+          - type: numberline
+            range: [0, 6]
+            step: 1
+            name: 八分音符
+            spans:
+              - {from: 0, to: 3, label: 1拍目, at: 1, focus: [1]}
+              - {from: 3, to: 6, label: 2拍目, at: 2, focus: [2]}
+        lines:
+          - text: 8分の6拍子の1小節を、八分音符で数えると、6つです。
+            say: 8ぶんの6びょうしの、いっしょうせつを、八分音符で数えると、6つです。
+          - text: はじめの3つが、1拍目です。
+          - text: あとの3つが2拍目です。1拍は、八分音符3つ分、つまり付点四分音符と同じ長さです。
+  - id: check
+    title: 確認
+    scenes:
+      - id: check-1
+        kind: quiz
+        sources: [s1, s2]
+        blocks:
+          - type: quiz
+            question: 4分の3拍子の1小節に、八分音符はいくつ入る？
+            answer: 6つ（1拍に2つ × 3拍）
+            answer_at: 1
+        lines:
+          - text: 止めて考えましょう。4分の3拍子の1小節に、八分音符はいくつ入るでしょう？
+            say: 止めて考えましょう。4ぶんの3びょうしの、いっしょうせつに、八分音符は、いくつ入るでしょう？
+            pause: true
+          - text: 四分音符1拍に、八分音符は2つ入ります。3拍あるので、2 × 3で6つです。
+            say: 四分音符1拍に、八分音符は2つ入ります。3拍あるので、2かける3で、6つです。
+      - id: check-2
+        kind: quiz
+        sources: [s1, s2]
+        blocks:
+          - type: quiz
+            question: 付点二分音符と何を合わせると、4分の4拍子の1小節になる？
+            answer: 四分音符（3拍 ＋ 1拍 ＝ 4拍）
+            answer_at: 1
+        lines:
+          - text: もう一問。4分の4拍子の1小節に、付点二分音符を置きました。あと何を1つ置くと、1小節がうまるでしょう？
+            say: もう一問。4ぶんの4びょうしの、いっしょうせつに、付点二分音符を置きました。あと何を1つ置くと、いっしょうせつが、うまるでしょう？
+            pause: true
+          - text: 付点二分音符は3拍なので、残りは1拍。四分音符を1つ置けば、4拍になります。
+  - id: end
+    title: まとめ
+    scenes:
+      - id: end-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, text: まとめ}
+          - type: bullets
+            items:
+              - {text: "全音符4拍・二分音符2拍・四分音符1拍・八分音符半拍", at: 0, focus: [0]}
+              - {text: 付点は、もとの長さの1.5倍, at: 1, focus: [1]}
+              - {text: 拍子記号は、下が基準の音符、上がその数, at: 2, focus: [2]}
+        lines:
+          - text: 四分音符を1拍とすると、全音符は4拍、二分音符は2拍、八分音符は半拍です。
+            say: 四分音符を1拍とすると、全音符は4拍、二分音符は2拍、八分音符は、はんぱくです。
+          - text: 付点の付いた音符は、もとの長さの1.5倍です。
+          - text: 拍子記号は、下の数が基準にする音符、上の数がその数です。4分の4拍子なら、四分音符が4つです。
+            say: 拍子記号は、下の数が、基準にする音符、上の数が、その数です。4ぶんの4びょうしなら、四分音符が4つです。

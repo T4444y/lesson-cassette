@@ -1,0 +1,201 @@
+# 構成：時差のしくみ（地理の入門。約4分、9シーン）
+#  1 はじめに     intro-1  3つの要点（title・bullets）
+#  2 経度と時刻   rot-1    360度 ÷ 24時間 ＝ 15度（formula・text）
+#                 nl-1     時差と経度の差の二重数直線（numberline + second）
+#                 east-1   東ほど時刻が進む（compare）
+#  3 標準時       jst-1    日本の標準時は東経135度、協定世界時＋9時間（bullets・note）
+#                 zones-1  3つの地域の標準時（table plain・note）
+#                 calc-1   日本とアメリカ東部の時差（numberline + second・span）
+#  4 確認         check-1  日本が午後3時のとき、イギリス（冬）は？
+#                 check-2  経度が45度ちがうと、時差は？
+#  5 まとめ       end-1    箇条書き3項目
+# 範囲の外：日付変更線、夏時間の期間、国ごとの標準時の決め方（経度ちょうどでない地域）、協定世界時のしくみ（原子時計・うるう秒）
+# 数はすべて検算（lessons/time-difference.verify.py）
+format: lesson-cassette
+version: 1
+id: time-difference
+title: 時差のしくみ
+kicker: 地理 ・ 経度と時刻
+lang: ja
+sources:
+  - id: s1
+    label: 情報通信研究機構（NICT）「日本標準時」パンフレット
+    url: https://rri.nict.go.jp/_assets/pdf/panf_JST.pdf
+    note: 日本の標準時が協定世界時より9時間進んでいて、その差が東経135度にあたること。日本標準時をつくって提供しているのが NICT であること
+  - id: s2
+    label: Wikipedia（英語版）「Greenwich Mean Time」
+    url: https://en.wikipedia.org/wiki/Greenwich_Mean_Time
+    note: イギリスでは冬は UTC+0、夏は UTC+1（英国夏時間）を使う
+  - id: s3
+    label: Wikipedia（英語版）「Eastern Time Zone」
+    url: https://en.wikipedia.org/wiki/Eastern_Time_Zone
+    note: アメリカ東部の標準時（EST）は UTC−5 で、西経75度の平均太陽時にもとづく。夏時間（EDT）は UTC−4
+  - id: s4
+    label: 経度と時刻の関係（計算）
+    note: 地球は約24時間で1回転（360度）するので、360 ÷ 24 ＝ 15 度で1時間、1度で4分。検算スクリプトで確かめた
+chapters:
+  - id: intro
+    title: はじめに
+    scenes:
+      - id: intro-1
+        sources: [s1, s4]
+        blocks:
+          - {type: title, kicker: 地理 ・ 経度と時刻, text: 時差のしくみ}
+          - type: bullets
+            items:
+              - {text: 経度15度で、時刻が1時間ずれる, at: 1, focus: [1]}
+              - {text: 東にある地点ほど、時刻が進んでいる, at: 1, focus: [1]}
+              - {text: 日本の標準時は、東経135度が基準, at: 2, focus: [2]}
+        lines:
+          - text: このカセットでは、国や地域によって時刻がちがう、時差のしくみを学びます。
+          - text: 時差は、経度の差で決まります。15度ちがうと1時間ずれ、東にある地点ほど時刻が進んでいます。
+          - text: 日本の標準時は、東経135度を基準にした時刻です。
+  - id: longitude
+    title: 経度と時刻
+    scenes:
+      - id: rot-1
+        sources: [s4]
+        blocks:
+          - {type: title, kicker: 経度と時刻, text: 1時間で15度}
+          - {type: formula, text: "360 ÷ 24 ＝ 15", at: 1}
+          - {type: text, text: "1時間に15度回る", at: 1}
+          - {type: text, text: "経度が15度ちがうと1時間、1度なら4分ずれる", at: 2}
+        lines:
+          - text: 地球は、およそ24時間で1回転、つまり360度回ります。
+            say: 地球は、およそ24時間で、いっかいてん、つまり、360度回ります。
+          - text: 360度を24時間で割ると、15度。1時間に15度回る計算です。
+            say: 360度を、24時間で割ると、15度。1時間に、15度回る計算です。
+          - text: そのため、経度が15度ちがうと、時刻は1時間ずれます。1度なら、60 ÷ 15で4分です。
+            say: そのため、経度が15度ちがうと、時刻は1時間ずれます。1度なら、60わる15で、4分です。
+      - id: nl-1
+        sources: [s1, s4]
+        blocks:
+          - {type: title, kicker: 二重数直線, text: 時差と経度の差}
+          - type: numberline
+            range: [0, 12]
+            step: 1
+            name: 時差
+            suffix: 時間
+            second: {factor: 15, suffix: 度, name: 経度の差}
+            points:
+              - {value: 1, label: "1時間 = 15度", at: 1, focus: [1]}
+              - {value: 9, label: "9時間 = 135度", at: 2, focus: [2]}
+        lines:
+          - text: 時差と経度の差を、二重数直線に並べました。上が時差、下が経度の差です。
+          - text: 1時間の時差は、経度15度の差にあたります。
+          - text: 9時間なら、15 × 9で135度です。この135度が、日本の時刻にかかわってきます。
+            say: 9時間なら、15かける9で、135度です。この135度が、日本の時刻に、かかわってきます。
+      - id: east-1
+        sources: [s4]
+        blocks:
+          - {type: title, kicker: 経度と時刻, text: 東ほど時刻が進む}
+          - type: compare
+            at: 1
+            left: {label: 西の地点, title: 時刻が遅れている, note: 太陽があとからのぼる}
+            right: {label: 東の地点, title: 時刻が進んでいる, note: 太陽が先にのぼる, tone: "on"}
+        lines:
+          - text: では、東と西では、どちらの時刻が進んでいるでしょう。
+          - text: 地球は西から東へ回っているので、太陽は、東の地点から先にのぼります。
+          - text: そのため、東にある地点ほど、時刻が進んでいます。
+  - id: standard
+    title: 標準時
+    scenes:
+      - id: jst-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 標準時, text: 日本の標準時}
+          - type: bullets
+            items:
+              - {text: "世界の時刻の基準：**協定世界時**", at: 0, focus: [0]}
+              - {text: "日本の標準時：**東経135度**が基準", at: 1, focus: [1]}
+              - {text: "135 ÷ 15 ＝ 9 → 協定世界時より **9時間進む**", at: 2, focus: [2]}
+          - {type: note, label: 補足, text: 日本の標準時は、情報通信研究機構（NICT）が作り、届けている, at: 3}
+        lines:
+          - text: 世界の時刻には、基準があります。協定世界時と呼ばれる時刻です。
+          - text: 日本の標準時は、東経135度を基準にした時刻です。
+          - text: 135度を15度で割ると9。だから日本の標準時は、協定世界時より9時間進んでいます。
+          - text: 日本の標準時は、情報通信研究機構という、国の研究機関が作り、届けています。
+      - id: zones-1
+        sources: [s1, s2, s3]
+        blocks:
+          - {type: title, kicker: 標準時, text: 3つの地域の標準時}
+          - type: table
+            head: [地域, 基準の経度, 協定世界時との差]
+            widths: [2, 2, 2]
+            align: [left, center, center]
+            rows:
+              - {cells: [日本, 東経135度, "＋9時間"], at: 0, focus: [0]}
+              - {cells: [イギリス（冬）, 0度, "±0"], at: 1, focus: [1]}
+              - {cells: [アメリカ東部（冬）, 西経75度, "−5時間"], at: 2, focus: [2]}
+          - {type: note, label: 補足, text: 夏のあいだは、イギリスもアメリカ東部も時計を1時間進める（夏時間）, at: 3}
+        lines:
+          - text: 日本の標準時は、東経135度が基準で、協定世界時より9時間進んでいます。
+          - text: イギリスの冬の時刻は、経度0度が基準で、協定世界時と同じです。
+          - text: アメリカ東部の冬の時刻は、西経75度が基準です。75 ÷ 15で、協定世界時より5時間遅れています。
+            say: アメリカ東部の、冬の時刻は、西経75度が基準です。75わる15で、協定世界時より、5時間遅れています。
+          - text: 夏のあいだは、イギリスもアメリカ東部も、時計を1時間進める、夏時間を使います。
+      - id: calc-1
+        sources: [s1, s3]
+        blocks:
+          - {type: title, kicker: 時差を求める, text: 日本とアメリカ東部（冬）}
+          - type: numberline
+            range: [-6, 10]
+            step: 1
+            label_every: 2
+            name: 時差（時間）
+            second: {factor: 15, name: 経度（度）}
+            spans:
+              - {from: -5, to: 9, label: 14時間, at: 2, focus: [2]}
+            points:
+              - {value: -5, label: アメリカ東部（−5）, at: 1}
+              - {value: 0, label: イギリス（0）, at: 1}
+              - {value: 9, label: 日本（＋9）, at: 1}
+        lines:
+          - text: 協定世界時との時差を、数直線に並べます。下の段は経度で、西経はマイナスで表しています。
+          - text: 日本はプラス9時間、イギリスの冬は0、アメリカ東部の冬はマイナス5時間です。
+          - text: 日本とアメリカ東部は、0をはさんで東と西に分かれているので、9と5を足して、14時間の時差です。
+  - id: check
+    title: 確認
+    scenes:
+      - id: check-1
+        kind: quiz
+        sources: [s1, s2]
+        blocks:
+          - type: quiz
+            question: 日本が1月10日の午後3時のとき、イギリスは何時？
+            answer: 同じ1月10日の午前6時（日本より9時間遅れている）
+            answer_at: 1
+        lines:
+          - text: 止めて考えましょう。日本が1月10日の午後3時のとき、イギリスは何時でしょう？
+            pause: true
+          - text: 1月なので、イギリスは冬の時刻で、日本より9時間遅れています。午後3時から9時間戻すと、同じ日の午前6時です。
+            say: 1月なので、イギリスは冬の時刻で、日本より9時間遅れています。午後3時から、9時間戻すと、同じ日の、午前6時です。
+      - id: check-2
+        kind: quiz
+        sources: [s4]
+        blocks:
+          - type: quiz
+            question: 経度が45度ちがう2つの地点の時差は？
+            answer: 3時間（45 ÷ 15 ＝ 3）
+            answer_at: 1
+        lines:
+          - text: もう一問。経度が45度ちがう2つの地点では、時差は何時間でしょう？
+            pause: true
+          - text: 15度で1時間なので、45 ÷ 15で、3時間です。
+            say: 15度で1時間なので、45わる15で、3時間です。
+  - id: end
+    title: まとめ
+    scenes:
+      - id: end-1
+        sources: [s1, s4]
+        blocks:
+          - {type: title, text: まとめ}
+          - type: bullets
+            items:
+              - {text: 経度15度で1時間（1度で4分）, at: 0, focus: [0]}
+              - {text: 東にある地点ほど、時刻が進んでいる, at: 1, focus: [1]}
+              - {text: 日本の標準時は東経135度が基準、協定世界時より9時間進む, at: 2, focus: [2]}
+        lines:
+          - text: 地球は1時間に15度回るので、経度15度で1時間、1度で4分の時差になります。
+          - text: 地球は西から東へ回るので、東にある地点ほど、時刻が進んでいます。
+          - text: 日本の標準時は、東経135度が基準で、協定世界時より9時間進んでいます。

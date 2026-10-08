@@ -1,0 +1,170 @@
+# 構成：画面の部品の見本（2026-10-08 に足した部品を、1 つずつ見せる）
+#   表（換算表・2軸の表・列の揃えと幅）→ 数直線 → グラフ（棒・折れ線）→ 線分 → まとめ
+#   グラフの数値は説明用に作った例（台詞と題で「作った例」と言う）
+format: lesson-cassette
+version: 1
+id: parts-catalog
+title: 画面の部品の見本
+kicker: サンプル ・ 表と図の部品
+lang: ja
+sources:
+  - id: s1
+    label: 学習カセット 形式仕様 v1（SPEC.md）
+  - id: s2
+    label: 小数・分数・百分率、九九、1次関数の標準的な内容
+    note: 数値は作成時にプログラム（sympy）で検算
+chapters:
+  - id: tables
+    title: 表
+    scenes:
+      - id: convert-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 換算表, text: 同じ大きさを3通りで}
+          - type: table
+            style: convert
+            head: [小数, 分数, 百分率]
+            rows:
+              - {cells: ["0.5", "1/2", "50%"], at: 1, focus: [1]}
+              - {cells: ["0.25", "1/4", "25%"], at: 2, focus: [2]}
+              - {cells: ["0.1", "1/10", "10%"], at: 3, focus: [3]}
+        lines:
+          - text: 換算表は、同じ大きさを、いくつかの書き方で並べる表です。
+          - text: 0.5は、2分の1で、50%です。
+            say: 0.5は、2ぶんの1で、50パーセントです。
+          - text: 0.25は、4分の1で、25%です。
+            say: 0.25は、4ぶんの1で、25パーセントです。
+          - text: 0.1は、10分の1で、10%です。
+            say: 0.1は、10ぶんの1で、10パーセントです。
+      - id: matrix-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 2軸の表, text: 行と列が交わるところ}
+          - type: table
+            style: matrix
+            head: ["×", "1", "2", "3", "4", "5"]
+            rows:
+              - ["1", "1", "2", "3", "4", "5"]
+              - ["2", "2", "4", "6", "8", "10"]
+              - {cells: ["3", "3", "6", "9", "12", "15"], focus: [1, 2]}
+            cols: [null, null, null, null, {focus: [2]}, null]
+        lines:
+          - text: 2軸の表は、行の見出しと列の見出しを持つ表です。九九の表がその例です。
+            say: 2軸の表は、ぎょうの見出しと、列の見出しを持つ表です。九九の表が、その例です。
+          - text: まず、3の段の行に注目します。
+            say: まず、3のだんの、ぎょうに注目します。
+          - text: 4の列と交わるところが、3×4の答え、12です。
+            say: 4の列と交わるところが、3かける4の答え、12です。
+      - id: align-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 列の揃えと幅, text: 文章の多い表}
+          - type: table
+            head: [部品, 使いどころ, 列]
+            widths: [2, 5, 1]
+            align: [left, left, right]
+            rows:
+              - ["換算表", "同じ大きさの言いかえを並べる", "3"]
+              - ["2軸の表", "行と列の組み合わせを見る", "6"]
+              - ["数直線", "大きさの位置を比べる", "—"]
+        lines:
+          - text: 文章の多い表は、列の幅の比と、文字の揃えを決められます。
+            say: 文章の多い表は、列の幅の比と、文字のそろえを決められます。
+          - text: ここでは、真ん中の列を広くし、数の列は右に揃えています。
+  - id: numberline
+    title: 数直線
+    scenes:
+      - id: nl-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 数直線, text: 0.35は、どのあたり？}
+          - type: numberline
+            range: [0, 1]
+            step: 0.1
+            name: 小数
+            second: {factor: 100, suffix: "%", name: 百分率}
+            spans: [{from: 0, to: 0.35, at: 1}]
+            points: [{value: 0.35, label: "0.35 = 35%", at: 1, focus: [2]}]
+        lines:
+          - text: 数直線の上に小数を、下に百分率を並べました。
+            say: 数直線の上に小数を、下に百分率を、並べました。
+          - text: 0から0.35までの長さが、35%にあたります。
+            say: 0から0.35までの長さが、35パーセントにあたります。
+          - text: 上と下の目盛りは、いつも同じ位置で対応しています。
+  - id: charts
+    title: グラフ
+    scenes:
+      - id: bar-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 棒グラフ（作った例）, text: 1週間の学習時間}
+          - type: chart
+            kind: bar
+            labels: [月, 火, 水, 木, 金]
+            series:
+              - {name: 学習時間, values: [30, 45, 20, 60, 40]}
+            unit: 分
+            height: 220
+        lines:
+          - text: 棒グラフは、数の大小を、棒の長さで比べます。数は説明用に作った例です。
+          - text: いちばん長いのは木曜日の60分です。
+            say: いちばん長いのは、木曜日の60分です。
+      - id: line-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 折れ線グラフ（作った例）, text: 2つの店の来客数}
+          - type: chart
+            kind: line
+            labels: [4月, 5月, 6月, 7月, 8月]
+            series:
+              - {name: A店, values: [120, 135, 150, 170, 160], focus: [1]}
+              - {name: B店, values: [90, 110, 105, 140, 175], at: 1, focus: [2]}
+            unit: 人
+            height: 220
+        lines:
+          - text: 折れ線グラフは、時間とともに変わる数を、線でたどります。
+          - text: A店は、7月まで増え、8月に少し減りました。
+            say: エーてんは、7月まで増え、8月に少し減りました。
+          - text: B店は、8月に175人まで増え、A店を上回りました。
+            say: ビーてんは、8月に175人まで増え、エーてんを上回りました。
+  - id: segment
+    title: 線分
+    scenes:
+      - id: seg-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, kicker: 線分, text: 傾きを三角形で見る}
+          - type: plot
+            x: [-1, 4]
+            y: [-1, 8]
+            height: 240
+            curves:
+              - {kind: line, m: 2, k: 1, label: "y = 2x + 1"}
+              - {kind: segment, from: [1, 3], to: [2, 3], arrow: true, color: second, label: 右へ 1, at: 1}
+              - {kind: segment, from: [2, 3], to: [2, 5], arrow: true, color: second, label: 上へ 2, at: 2}
+            points:
+              - {x: 1, y: 3, at: 1}
+              - {x: 2, y: 5, at: 2}
+        lines:
+          - text: 線分の部品で、グラフに矢印つきの線を足せます。
+          - text: y = 2x + 1 の上で、右へ1進むと、
+            say: ワイ、イコール、2エックス、プラス1の上で、右へ1進むと、
+          - text: 上へ2進みます。この2が傾きです。
+            say: 上へ2進みます。この2が、傾きです。
+  - id: end
+    title: まとめ
+    scenes:
+      - id: end-1
+        sources: [s1]
+        blocks:
+          - {type: title, text: 足した部品}
+          - type: bullets
+            items:
+              - {text: "表：換算表・2軸の表・列の揃えと幅", at: 0, focus: [0]}
+              - {text: 数直線（2つの目盛りを並べられる）, at: 1, focus: [1]}
+              - {text: "棒グラフ・折れ線グラフと、グラフの線分", at: 2, focus: [2]}
+        lines:
+          - text: 表は、換算表、2軸の表、列の揃えと幅の3つを足しました。
+            say: 表は、換算表、2軸の表、列のそろえと幅の、3つを足しました。
+          - text: 数直線は、2つの目盛りを上下に並べられます。
+          - text: グラフは、棒と折れ線、それに線分を足しました。

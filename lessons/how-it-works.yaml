@@ -1,0 +1,85 @@
+format: lesson-cassette
+version: 1
+id: how-it-works
+title: 台本から組み立てる学習動画
+kicker: サンプル ・ 音声入り
+lang: ja
+sources:
+  - id: s1
+    label: 学習カセット 形式仕様 v1（SPEC.md）
+  - id: s2
+    label: Open JTalk（名古屋工業大学）
+    url: https://open-jtalk.sourceforge.net/
+chapters:
+  - id: intro
+    title: はじめに
+    scenes:
+      - id: intro-1
+        sources: [s1]
+        blocks:
+          - {type: title, kicker: 学習動画の仕組み, text: 台本から、自動で組み立てる}
+          - type: compare
+            at: 1
+            left: {label: よくある形, title: 動画ファイル, note: 書き出し・再編集が重い, tone: "off"}
+            right: {label: この形式, title: カセット 1 本, note: 台本を直せば作り直せる, tone: "on"}
+        lines:
+          - text: これは、台本から自動で組み立てた、学習用の動画です。
+          - text: 中身は動画ファイルではなく、カセットと呼ぶ JSON ファイル 1 つです。
+            say: 中身は動画ファイルではなく、カセットと呼ぶ、ジェイソンファイル一つです。
+  - id: how
+    title: しくみ
+    scenes:
+      - id: how-1
+        sources: [s1]
+        blocks:
+          - {type: title, text: 作り方は 3 段階}
+          - type: steps
+            items:
+              - {title: 音声にする, note: 台本を 1 行ずつ合成, at: 1, focus: [1]}
+              - {title: 時刻表を作る, note: 各行の長さを測る, at: 2, focus: [2]}
+              - {title: カセットにまとめる, note: 部品・音声・時刻表, at: 3, focus: [3]}
+        lines:
+          - text: 作り方は、三つの段階に分かれます。
+          - text: まず、台本を一行ずつ、音声に変えます。
+          - text: 次に、各行の長さを測って、時刻表を作ります。
+          - text: 最後に、画面の部品と音声と時刻表を、カセットにまとめます。
+      - id: how-2
+        sources: [s1]
+        blocks:
+          - {type: formula, text: "画面 = f( 時刻 )"}
+          - {type: text, text: "どこに飛んでも、その時刻の画面がそのまま描かれる", at: 1}
+        lines:
+          - text: 再生中は、音声の今の時刻から、画面を毎回計算し直します。
+          - text: だから、途中に飛んでも、同じ画面が再現されます。
+  - id: check
+    title: 確認
+    scenes:
+      - id: check-1
+        kind: quiz
+        sources: [s1]
+        blocks:
+          - type: quiz
+            question: 途中の時刻に飛んでも同じ画面になるのは、なぜでしょう？
+            answer: 画面が、時刻だけで決まるように作られているから。
+            answer_at: 1
+        lines:
+          - text: 止めて考えましょう。途中の時刻に飛んでも同じ画面になるのは、なぜでしょう？
+            pause: true
+          - text: 画面が、時刻だけで決まるように作られているからです。
+  - id: end
+    title: まとめ
+    scenes:
+      - id: end-1
+        sources: [s1, s2]
+        blocks:
+          - {type: title, text: このサンプルで確かめたこと}
+          - type: bullets
+            items:
+              - {text: 音声エンジンは差し替えられる, at: 0, focus: [0]}
+              - {text: 今回の声はオープンソースの **Open JTalk**, at: 1, focus: [1]}
+              - {text: 同じ台本から同じカセットが作れる, at: 2, focus: [2]}
+        lines:
+          - text: 音声エンジンは差し替えられるので、権利の条件に合わせて選べます。
+          - text: 今回の声は、オープンソースの Open JTalk です。
+            say: 今回の声は、オープンソースの、オープンジェイトークです。
+          - text: 同じ台本からは、毎回同じカセットが作れます。
